@@ -1,0 +1,232 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/portfolio/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: Portfolio ID
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Retrieves a portfolio
+      tags:
+      - Portfolios
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '404':
+          description: Portfolio not found
+  "/api/v1/holdings/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: Portfolio ID
+      required: true
+      schema:
+        type: integer
+    get:
+      summary: Retrieves portfolio holdings
+      tags:
+      - Portfolios
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '404':
+          description: Portfolio or stocks not found
+  "/api/v1/returns/{id}":
+    get:
+      summary: Retrieves returns for a portfolio
+      tags:
+      - Portfolios
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  example:
+                    type: string
+  "/api/v1/stocks":
+    get:
+      summary: Retrieves all stocks
+      tags:
+      - Stocks
+      responses:
+        '200':
+          description: stocks found
+    post:
+      summary: Creates a stock
+      tags:
+      - Stocks
+      parameters: []
+      responses:
+        '201':
+          description: stock created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+              required:
+              - name
+  "/api/v1/stocks/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+    put:
+      summary: Updates a stock
+      tags:
+      - Stocks
+      parameters: []
+      responses:
+        '200':
+          description: stock updated
+        '422':
+          description: invalid request
+        '404':
+          description: stock not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+    delete:
+      summary: Deletes a stock
+      tags:
+      - Stocks
+      responses:
+        '204':
+          description: stock deleted
+        '404':
+          description: stock not found
+  "/api/v1/addTrade":
+    post:
+      summary: Creates a trade
+      tags:
+      - Trades
+      parameters: []
+      responses:
+        '201':
+          description: trade created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date
+                price:
+                  type: number
+                trade_type:
+                  type: string
+                stock_count:
+                  type: integer
+                portfolio_id:
+                  type: integer
+                stock_id:
+                  type: integer
+              required:
+              - date
+              - price
+              - trade_type
+              - stock_count
+              - portfolio_id
+              - stock_id
+  "/api/v1/updateTrade/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    post:
+      summary: Updates a trade
+      tags:
+      - Trades
+      parameters: []
+      responses:
+        '200':
+          description: trade updated
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date:
+                  type: string
+                  format: date
+                price:
+                  type: number
+                trade_type:
+                  type: string
+                stock_count:
+                  type: integer
+                portfolio_id:
+                  type: integer
+                stock_id:
+                  type: integer
+              required:
+              - date
+              - price
+              - trade_type
+              - stock_count
+              - portfolio_id
+              - stock_id
+  "/api/v1/removeTrade/{id}":
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    delete:
+      summary: Deletes a trade
+      tags:
+      - Trades
+      responses:
+        '204':
+          description: trade deleted
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000/

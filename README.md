@@ -1,24 +1,60 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Install
 
-Things you may want to cover:
+### Clone the repository
 
-* Ruby version
+```bash
+git clone https://github.com/shimroz1992/Portfolio_API_Assignment.git
+cd PortfolioTracker
 
-* System dependencies
+```
 
-* Configuration
+### Check your Ruby version
 
-* Database creation
+```bash
+ruby -v
+```
 
-* Database initialization
+The output should start with something like 'ruby '3.1.1'
 
-* How to run the test suite
+If not, install the right ruby version using rvm (it could take a while):
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+rvm install "ruby '3.1.1'"
+```
 
-* Deployment instructions
+### Install dependencies
 
-* ...
+Using [Bundler](https://github.com/bundler/bundler):
+
+```bash
+bundle
+```
+
+### Update database.yml file
+In database.yml file, edit the database configuration as required.
+
+### Initialize the database
+
+```ruby
+rails db:create db:migrate
+```
+
+### Run rake task to import Portfolio_Api application
+
+```ruby
+rails server
+or
+rails s
+```
+## If we want to run the application on Swager 
+1) Improt the gem swagger use this link below
+2) https://github.com/rswag/rswag
+3) it's easy to install
+
+run the below URL 
+http://localhost:3000/api-docs/index.html
+
+and without swagger, you can run
+http://localhost:3000
